@@ -33,7 +33,7 @@ namespace TestProject1
                 read.Click();
 
                 // Click vào logo để về trang chủ 
-                var logo = WaitForElementToBeInteractable(driver, By.ClassName("header_top-left"), TimeSpan.FromSeconds(10));
+                var logo = WaitForElementToBeInteractable(driver, By.CssSelector(".container .header__top-flex a"), TimeSpan.FromSeconds(10));
                 logo.Click();
             }
             catch (NoSuchElementException e)
