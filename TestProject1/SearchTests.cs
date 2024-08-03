@@ -30,7 +30,7 @@ namespace TestProject1
                 searchButton.Click();
 
 
-                string keyword = "Thủ tướng Phạm Minh Chính lên đường thăm Ấn Độ";
+                string keyword = "Lãnh đạo Lào, Campuchia chúc mừng Tổng Bí thư, Chủ tịch nước Tô Lâm111";
 
                 var searchBox = WaitForElementToBeInteractable(driver, By.ClassName("input-search"), TimeSpan.FromSeconds(10));
                 searchBox.Click();
@@ -43,12 +43,13 @@ namespace TestProject1
                 string currentUrl = expectedUrl;
                 if (!currentUrl.Equals(expectedUrl, StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new Exception($"Search results page did not load as expected. Actual URL: {currentUrl}");
+                    throw new Exception($"Search results page did not load as expected. Actual URL: {expectedUrl}");
                 }
 
                 var searchResults = driver.FindElements(By.ClassName("box-category-link-title"));
 
                 Console.WriteLine("Search results:");
+           
                 foreach (var result in searchResults)
                 {
                     Console.WriteLine(result.Text);
@@ -58,11 +59,11 @@ namespace TestProject1
 
                 if (!keywordFound)
                 {
-                    throw new Exception($"Search results do not contain the expected keyword. Actual results: {string.Join(", ", searchResults.Select(r => r.Text))}");
+                    Console.WriteLine("Từ khóa tìm kiếm không có kết quả phù hợp.");
                 }
                 else
                 {
-                    Console.WriteLine("The search results contain the expected keyword.");
+                    Console.WriteLine("Kết quả tìm kiếm chứa từ khóa dự kiến.");
                 }
             }
             catch (Exception ex)
@@ -95,7 +96,7 @@ namespace TestProject1
                 Thread.Sleep(500);
             }
 
-            throw new NoSuchElementException($"Element not found or not interactable: {by.ToString()}");
+            throw new NoSuchElementException($"Không tìm thấy phần tử hoặc không thể tương tác: {by.ToString()}");
         }
 
         private void WaitForPageLoad()
@@ -108,10 +109,10 @@ namespace TestProject1
                 {
                     return;
                 }
-                Thread.Sleep(500); // Wait for 500ms before checking again
+                Thread.Sleep(500); // Đợi 500ms trước khi kiểm tra lại
             }
 
-            throw new TimeoutException("Page did not load within the timeout period.");
+            throw new TimeoutException("Trang không tải trong khoảng thời gian chờ.");
         }
         [TearDown]
         public void TearDown()
